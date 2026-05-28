@@ -21,7 +21,7 @@ export function TransactionsModal({ selectedHoldings, savings }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button disabled={selectedHoldings.length === 0}>
+        <Button disabled={selectedHoldings.length === 0} className="text-gray-50 dark:text-white">
           View {selectedHoldings.length} Harvest Transaction{selectedHoldings.length === 1 ? "" : "s"}
         </Button>
       </DialogTrigger>
