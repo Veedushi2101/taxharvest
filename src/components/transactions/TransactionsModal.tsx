@@ -25,7 +25,7 @@ export function TransactionsModal({ selectedHoldings, savings }: Props) {
           View {selectedHoldings.length} Harvest Transaction{selectedHoldings.length === 1 ? "" : "s"}
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className = "bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)]">
         <DialogHeader>
           <DialogTitle>All Harvest Transactions</DialogTitle>
           <p className="text-sm text-[var(--foreground)]/60">

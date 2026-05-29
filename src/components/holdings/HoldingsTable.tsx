@@ -76,26 +76,18 @@ export function HoldingsTable({ holdings, selectedIds, onToggle, onToggleAll, li
       )}
 
       {/* Desktop table */}
-      <div className="
-hidden
-overflow-x-auto
-rounded-2xl
-border
-border-[var(--border)]
-bg-[var(--card)]
-md:block
-">
+      <div className="hidden overflow-x-auto rounded-2xl border border-[var(--border)] bg-[var(--card)] md:block">
         <table className="w-full text-sm">
           <thead className="
-border-b
-border-[var(--border)]
-bg-black/[0.03]
-dark:bg-white/[0.02]
-text-xs
-uppercase
-tracking-wider
-text-[var(--foreground)]/50
-">
+          border-b
+          border-[var(--border)]
+          bg-black/[0.03]
+          dark:bg-white/[0.02]
+          text-xs
+          uppercase
+          tracking-wider
+          text-[var(--foreground)]/50
+          ">
             <tr>
               <th className="p-3 text-left">
                 <Checkbox

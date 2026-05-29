@@ -95,16 +95,19 @@ export default function Page() {
     <Navbar />
     <main
       className="
-mx-auto
-space-y-6
-px-4
-py-6
-md:px-6
-md:py-8
-bg-[var(--background)]
-text-[var(--foreground)]
-min-h-screen
-transition-colors
+      mx-auto
+  w-full
+  max-w-7xl
+  space-y-6
+  px-4
+  sm:px-6
+  lg:px-8
+  py-6
+  md:py-8
+  bg-[var(--background)]
+  text-[var(--foreground)]
+  min-h-screen
+  transition-colors
 "
     >
       <Header portfolioValue={portfolioValue} />
