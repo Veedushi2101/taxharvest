@@ -1,11 +1,18 @@
 # Tax Harvesting Dashboard
 
-A production-ready, recruiter-grade fintech dashboard for crypto tax loss harvesting. Built with **Next.js 14 (App Router)**, **TypeScript**, **Tailwind CSS**, and **shadcn/ui** primitives.
+A production-grade fintech dashboard that simulates crypto tax-loss harvesting and portfolio optimization.
+Built as part of the KoinX Frontend Engineering Assignment using Next.js 14, TypeScript, and Tailwind CSS.
+
+## Live Demo
+
+https://taxharvest-project.vercel.app/
+
+---
 
 ## Features
 
 - Pre / After Harvesting summary cards with STCG & LTCG breakdown
-- Realised Capital Gains computation in Indian currency formatting (₹70,200.88)
+- Realised Capital Gains computation in US currency formatting ($70,200.88)
 - Sortable, searchable, selectable holdings table (desktop) + mobile card layout
 - Select-all with indeterminate state
 - View All Holdings dialog
@@ -16,6 +23,7 @@ A production-ready, recruiter-grade fintech dashboard for crypto tax loss harves
 - Floating-point cleanup (values < 1e-6 normalized to 0)
 - Fully responsive (desktop / tablet / mobile)
 - Reusable utility & calculation modules
+- Dynamic STCG and LTCG recalculation
 
 ## Tech Stack
 
@@ -46,17 +54,32 @@ npm run start
 src/
 ├── app/                # Next.js App Router entry (layout, page, globals)
 ├── components/
-│   ├── summary/        # SummaryCard, SummarySection, skeleton
-│   ├── holdings/       # HoldingsTable, skeleton
+│   ├── summary/        # SummaryCard, SummarySection, SummarySkeleton
+│   ├── holdings/       # HoldingsTable, HoldingsSkeleton
 │   ├── transactions/   # TransactionsModal
 │   ├── ui/             # Button, Checkbox, Dialog, Input, Skeleton
+│   ├── Disclaimer.tsx  
+|   ├── ErrorState.tsx
 │   ├── Header.tsx
-│   └── ErrorState.tsx
+    ├── Navbar.tsx
+    └── ThemeToggle.tsx
 ├── services/           # Mock async APIs (holdings, capitalGains)
 ├── lib/                # calculations, formatters, utils
 ├── types/              # Shared TypeScript types
 └── data/               # Mock JSON dataset
 ```
+
+---
+
+## API Layer
+
+Mock APIs simulate real backend behavior using Promises (~900ms delay).
+
+### Holdings API
+Returns:
+- Asset details
+- Price data
+- STCG / LTCG breakdown
 
 ## Mock API
 
@@ -70,15 +93,56 @@ src/
 - Net = profits − losses; Realised = STCG net + LTCG net
 - Pre-harvest values come from the API; after-harvest is recomputed via `useMemo` based on selected holdings (no derived state).
 
-## Deployment (Vercel)
+### Capital Gains API
+Returns initial tax state:
+{
+  stcg: { profits, losses },
+  ltcg: { profits, losses }
+}
 
-```bash
-# Push to GitHub, import in Vercel — zero config needed.
-# Or via CLI:
-npx vercel
-```
+---
 
-No environment variables, no backend, no database required.
+## Holdings Table
+
+- Asset name, logo, and metadata
+- Holdings and average buy price
+- Current price tracking
+- STCG / LTCG breakdown
+- Row selection via checkbox
+- Select all / deselect all
+- Amount-to-sell auto updates
+- Sorting support
+- Search filtering
+
+---
+
+## Transactions Modal
+
+- Selected holdings breakdown
+- Per-asset STCG and LTCG impact
+- Total aggregated tax impact
+- Summary view of tax savings
+
+---
+
+## Responsiveness
+
+- Desktop: full analytical table
+- Mobile: optimized card layout
+- Fully responsive across breakpoints
+- Touch-friendly interactions
+
+---
+
+## Performance Optimizations
+
+- Memoized calculations using useMemo
+- Prevented unnecessary re-renders
+- Stable state updates for selection logic
+- Efficient filtering and sorting pipeline
+- Derived state avoided to maintain single source of truth
+
+---
 
 ## Assumptions
 
@@ -87,13 +151,27 @@ No environment variables, no backend, no database required.
 - "Amount to Sell" defaults to the entire holding when a row is selected.
 - Indian (₹) currency formatting with `en-IN` locale.
 
-## Screenshots
+---
 
-> _Add screenshots to `public/screenshots/` and reference them here._
+## Getting Started
 
-- `public/screenshots/desktop.png`
-- `public/screenshots/mobile.png`
+npm install
+npm run dev
 
-## License
+Open:
+http://localhost:3000
 
-MIT
+Production build:
+
+npm run build
+npm start
+
+---
+
+## Deployment
+
+Deploy using Vercel:
+
+npx vercel
+
+---
